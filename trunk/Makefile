@@ -1,13 +1,15 @@
 CC=g++
-CFLAGS=-c -Wall
+CFLAGS=-c -Wall -w -ansi -pedantic
 LDFLAGS=
 LOCATIONDIR=$(shell pwd)
+TESRDIR=~/Desktop/Project/Optimisation\ Basics/fft
 SOURCEDIR=$(LOCATIONDIR)/src
 BUILDDIR =$(LOCATIONDIR)/build
 OUTPUTDIR=$(LOCATIONDIR)/result
+INSTRUCTIONFILE=$(LOCATIONDIR)/instruction.txt
 $(shell [ -d "$(BUILDDIR)" ] || mkdir -p $(BUILDDIR))
 $(shell [ -d "$(OUTPUTDIR)" ] || mkdir -p $(OUTPUTDIR))
-SOURCE=$(SOURCEDIR)/main.cc
+SOURCE=$(SOURCEDIR)/main.cc 
 OBJECTS=$(SOURCE:.cc=.o)
 EXECUTABLE=$(BUILDDIR)/run
 
@@ -22,10 +24,13 @@ $(BUILDDIR):
 .cc.o:
 	$(CC) $(CFLAGS) $< -o $@
 
+run: $(EXECUTABLE)
+	./build/run $(INSTRUCTIONFILE) $(TESRDIR) $(OUTPUTDIR)
+
 clean:
 	rm -rf $(BUILDDIR)
 	rm -rf $(SOURCEDIR)/*.o
 	
-veryclean:
+cleandata:
 	rm -rf $(OUTPUTDIR)	
 
