@@ -1,6 +1,6 @@
 #define NumberOfAlgorithms	6
 
-#define _RS	0
+#define _RS		0
 #define _ABC	1
 #define _PSO	2
 #define _SSO	3
@@ -71,7 +71,7 @@ int main(int argc, char** argv){
 	testfiles = getdir(testfolder);
 	int tempincr = round(testfiles.size()/numberOfTestCases);
 	
-	std::cout<<testfiles.size()<<" "<<tempincr;
+	std::cout<<testfiles.size()<<" "<<tempincr<<std::endl;
 	levels.at(0).percentage = 1.0;
 	levels.at(1).percentage = 0.8;
 	levels.at(2).percentage = 0.7;
@@ -86,14 +86,16 @@ int main(int argc, char** argv){
 	int select = 0;
 	for(int o = 0; o+tempincr<testfiles.size(); o+=tempincr)
 	{
+		std::cout<<"the oth iteration is "<<o<<" "<<o+tempincr << " " << testfiles.size()<<std::endl;
 		select = (int) round(newRand()*tempincr);
 		printf("file : %d \n", (o+select));
 		if(testfiles.at(o+select)!= "." && testfiles.at(o+select)!= "..")
 		{				
-				char singlfile[70];
+				char singlfile[200];
 				strcpy(singlfile,testfolder.c_str());	
 				strcat(singlfile, testfiles.at(o+select).c_str());
 				Data d;
+				std::cout<<"file name is: "<<singlfile<<std::endl;
 				d = parse(singlfile);
 				tasklist = createDag(d);
 
@@ -104,7 +106,7 @@ int main(int argc, char** argv){
 				if(algorithmSelection[_MDPSO] !=0) MDPSO();
 				if(algorithmSelection[_MOSSO] !=0) MOSSO();		
 		}
-	};
+	}
 	
 	//File streams for output data
 	RSout.close();
